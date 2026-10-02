@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как я ловил человечков — страница 1</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 1.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/1.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>
+          огда я был маленький, меня отвезли жить к бабушке. У бабушки над столом была полка. А на полке пароходик.
+          Я такого никогда не видал. Он был совсем настоящий, только маленький. У него была труба: жёлтая и на ней
+          два чёрных пояса. И две мачты. А от мачт шли к бортам верёвочные лесенки. На корме стояла будочка, как домик.
+          Полированная, с окошечками и дверкой. А уж совсем на корме — медное рулевое колесо. Снизу под кормой — руль.
+          И блестел перед рулём винт, как медная розочка. На носу два якоря. Ах, какие замечательные! Если б хоть один
+          у меня такой был!
+        </p>
+        <p>
+          Он не пошёл по прямой дороге домой, где его ждала бы тёплая комната и чашка горячего шоколада. Вместо этого он
+          направился в сторону озера. Сегодня была пятница, а по пятницам у него была своя, особенная традиция —
+          прогулка к дедушке Дастану, который в это время всегда сидел на берегу, подставляя лицо зимнему ветру и глядя
+          на бесконечную водную гладь.
+        </p>
+        <p>
+          Я сразу запросил у бабушки, чтоб поиграть пароходиком. Бабушка мне всё позволяла. А тут вдруг нахмурилась:
+        </p>
+        <p>
+          — Вот это уж не проси. Не то играть — трогать не смей. Никогда! Это для меня дорогая память.
+        </p>
+        <p>
+          Я видел, что, если и заплакать, – не поможет.
+        </p>
+        <p>
+          А пароходик важно стоял на полке на лакированных подставках. Я глаз от него не мог оторвать. А бабушка:
+        </p>
+        <p>
+          — Дай честное слово, что не прикоснёшься. А то лучше спрячу‑ка от греха. — И пошла к полке.
+        </p>
+        <p>
+          Я чуть не заплакал и крикнул всем голосом:
+        </p>
+        <p>
+          — Честное-расчестное, бабушка. — И схватил бабушку за юбку. Бабушка не убрала пароходика.
+        </p>
+        <img id="undertext" src="./assets/img/page-1/UnderTextImage.png" alt="">
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — сюда помещаются слои-изображения.
+         Каждый слой: <img class="scene__img" id="имя" src="..." alt="">.
+         Позиции и размеры (в % от #scene, по макету Figma) — в 1.css,
+         анимацию/интерактив — в page1.js.
+         #overflow-wrapper не даёт слоям вылезать за границы сцены
+         при анимациях; если ничего не вылезает — можно удалить.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="Table" src="./assets/img/page-1/0-back 1.png" alt="Полка с корабликом">
+        <img class="scene__img" id="Boy" src="./assets/img/page-1/0-boy 1.png" alt="Мальчик">
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 1 -->
+  <script src="./assets/page1.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>

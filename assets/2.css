@@ -1,0 +1,46 @@
+/* ==========================================================================
+   2.css — сцена страницы 2: включение света при клике на лампу
+   ========================================================================== */
+
+/* Нижний слой: выключенный свет (всегда виден) */
+#lampoff {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Верхний слой: включенный свет (изначально скрыт, появляется плавно) */
+#lampon {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out;
+  pointer-events: none;
+}
+
+/* Класс активного света */
+#lampon.is-lit {
+  opacity: 1;
+}
+
+/* Невидимая кликабельная зона ровно над лампой и рукой с выключателем */
+#lamp-trigger {
+  position: absolute;
+  right: 10%;
+  bottom: 18%;
+  width: 32%;
+  height: 52%;
+  z-index: 5;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  background: transparent;
+}
