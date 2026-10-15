@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru-RU">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Как я ловил человечков — страница N</title>
+  <title>Как я ловил человечков</title>
+  
   <link rel="icon" type="image/png" href="./assets/img/icon.png">
-
-  <!-- Подключить N.css и pageN.js под номером страницы -->
   <link rel="stylesheet" href="./assets/main.css">
-  <link rel="stylesheet" href="./assets/N.css">
   <link rel="stylesheet" href="./assets/ui.css">
+  <link rel="stylesheet" href="./assets/index.css">
 
   <script>
     window.addEventListener('load', function () {
@@ -18,37 +16,75 @@
       if (loader) loader.remove();
     });
   </script>
-
   <script src="./postMessageHandler.js"></script>
   <script src="./assets/ui.js"></script>
 </head>
-
 <body>
 
   <div id="loader">
     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
 
-  <main>
+<main class="index-page">
+  <div id="canvas-scene">
 
-    <!-- ШАГ 1: перенести текст страницы (один <p> = один абзац) -->
-    <section id="content">
-      <div id="textbox">
-        <p>Начальная страницы WIP</p>
-        <!-- <img id="undertext" src="./assets/img/page-N/....png" alt=""> -->
-      </div>
-    </section>
+    <!-- ВСЕ ВОЛНЫ И ФОН НА ВЕСЬ РАЗВОРОТ 1920x1080 -->
+    <img class="abs bg-wave" src="./assets/img/page-index/BG wave.png" alt="Фон волн">
+    <img class="abs wave wave1" src="./assets/img/page-index/wave 1.png" alt="Волна 1">
+    <img class="abs wave wave2" src="./assets/img/page-index/wave 2.png" alt="Волна 2">
+    <img class="abs wave wave3" src="./assets/img/page-index/wave 3.png" alt="Волна 3">
+    <img class="abs wave wave4" src="./assets/img/page-index/wave 4.png" alt="Волна 4">
+    <img class="abs wave wave5" src="./assets/img/page-index/wave 5.png" alt="Волна 5">
+    <img class="abs wave wave6" src="./assets/img/page-index/wave 6.png" alt="Волна 6">
+    <!-- Левая сторона (текст) -->
+    <div class="side-container left-side">
+      <div class="text-parent">
+        <img class="abs decor-top" src="./assets/img/page-index/decor-top.png" alt="Декор верх">
+        <h1>Как я ловил<br>человечков</h1>
+        <img class="abs decor-helm" src="./assets/img/page-index/decor-helm.png" alt="Штурвал">
+        
+        <table class="credits">
+          <tr>
+            <td class="role">Автор:</td>
+            <td>Борис Житков</td>
+          </tr>
+          <tr>
+            <td class="role">Иллюстратор:</td>
+            <td>Евгения Абрамова</td>
+          </tr>
+          <tr>
+            <td class="role">Разработчик:</td>
+            <td>Демченко Кирилл</td>
+          </tr>
+        </table>
 
-    <!-- ШАГ 2: сверстать сцену. Позиции — в N.css, логика — в pageN.js -->
-    <div id="scene">
-      <div id="overflow-wrapper">
-        <!-- <img class="scene__img" id="layer-1" src="./assets/img/page-N/....png" alt=""> -->
+        <img class="abs decor-bottom" src="./assets/img/page-index/decor-bottom.png" alt="Декор низ">
       </div>
     </div>
 
+<!-- Правая сторона (только корабль и матросы) -->
+    <div class="side-container right-side">
+      <div class="abs ship-container">
+        <img class="abs sailor crew-4" src="./assets/img/page-index/crew4.png" alt="4">
+        <img class="abs sailor crew-5" src="./assets/img/page-index/crew5.png" alt="5">
+        <img class="ship-img" src="./assets/img/page-index/ship.png" alt="Корабль">
+      </div>
+
+      <div class="sailors-layer">
+        <img class="abs sailor crew-1" src="./assets/img/page-index/crew1.png" alt="1">
+        <img class="abs sailor crew-2" src="./assets/img/page-index/crew2.png" alt="2">
+        <img class="abs sailor crew-3" src="./assets/img/page-index/crew3.png" alt="3">
+        <img class="abs sailor crew-6" src="./assets/img/page-index/crew6.png" alt="6">
+        <img class="abs sailor crew-7" src="./assets/img/page-index/crew7.png" alt="7">
+        <img class="abs sailor crew-8" src="./assets/img/page-index/crew8.png" alt="8">
+        <img class="abs sailor crew-9" src="./assets/img/page-index/crew9.png" alt="9">
+        <img class="abs sailor crew-10" src="./assets/img/page-index/crew10.png" alt="10">
+      </div>
+    </div>
+
+  </div>
   </main>
 
-  <script src="./assets/pageN.js"></script>
+  <script src="./assets/index.js"></script>
 </body>
-
 </html>

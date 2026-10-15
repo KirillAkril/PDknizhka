@@ -1,0 +1,367 @@
+/* ========================================================================
+   1. БАЗОВЫЕ НАСТРОЙКИ ХОЛСТА (Адаптивный разворот 1920x1080)
+   ======================================================================== */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.index-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Главный холст разворота: пропорции 16:9 (1920x1080), масштабируется под экран */
+#canvas-scene {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw; /* 1080 / 1920 = 56.25% */
+  max-height: 100vh;
+  max-width: 177.78vh; /* 100vh * (1920/1080) */
+  display: flex;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.abs {
+  position: absolute;
+}
+
+/* ========================================================================
+   2. ЛЕВАЯ СТОРОНА (Ширина 840px от 1920px = 43.75%)
+   ======================================================================== */
+.left-side {
+  position: relative;
+  width: 43.75%; /* 840 / 1920 */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Текстовый родитель (648 x 745.82 внутри левой стороны) */
+.text-parent {
+  position: relative;
+  width: 77.14%; /* 648 / 840 */
+  aspect-ratio: 648 / 745.82;
+  max-width: 648px;
+}
+
+/* Верхний декор */
+.decor-top {
+  left: 30.38%;
+  top: 0%;
+  width: 39.23%;
+  height: auto;
+}
+
+/* Заголовок книги (в Figma шрифт 110px при ширине контейнера 648px) */
+.text-parent h1 {
+  position: absolute;
+  left: 0%;
+  top: 17%;
+  width: 100%;
+  font-family: "PT Astra Serif", serif;
+  font-weight: 700;
+  font-size: 5vw; /* Точный масштаб под размер 110px в макете */
+  color: #33597c;
+  line-height: 105%;
+  text-align: center;
+  margin: 0;
+}
+
+/* Штурвал */
+.decor-helm {
+  left: 45.44%;
+  top: 49.72%;
+  width: 9.12%;
+  height: auto;
+}
+
+/* Таблица кредитов */
+.credits {
+  position: absolute;
+  left: 19.60%;  /* 127 / 648 */
+  top: 63.01%;   /* 469.96 / 745.82 */
+  width: 60.80%; /* 394 / 648 */
+  text-align: left;
+  font-family: "PT Astra Sans", sans-serif;
+  font-size: 1.25vw; /* Четкий размер шрифта текста кредитов в пропорциях макета */
+  border-collapse: collapse;
+}
+
+.credits td {
+  padding: 1.2% 0;
+  color: #000000;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.credits .role {
+  font-weight: 700;
+  width: 40%;
+  text-align: left;
+}
+
+.credits td:last-child {
+  text-align: right;
+}
+
+/* Нижний декор */
+.decor-bottom {
+  left: 30.38%;
+  top: 85.54%;
+  width: 39.23%;
+  height: auto;
+  z-index: 23;
+}
+
+
+/* ========================================================================
+   3. ПРАВЫЙ КОНТЕЙНЕР (Квадрат 1080x1080, ровно 56.25% от 1920)
+   ======================================================================== */
+.right-side {
+  position: relative;
+  width: 56.25%; /* 1080 / 1920 */
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ========================================================================
+   ПРАВЫЙ КОНТЕЙНЕР: КОРАБЛЬ И ВОЛНЫ
+   ======================================================================== */
+
+/* Контейнер корабля (потомок правого фрейма 1080x1080) */
+.ship-container {
+  left: 9.17%;          /* 99.01 / 1080 */
+  top: 13.69%;          /* 147.87 / 1080 */
+  width: 83.21%;        /* 898.65 / 1080 */
+  aspect-ratio: 898.65 / 840.26; /* Фиксируем пропорции из Figma */
+  pointer-events: auto;
+  z-index: 0;
+}
+
+/* Картинка корабля заполняет свой контейнер */
+.ship-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+/* Фоновые полосы на нижней половине разворота */
+.bg-wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 115%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Делаем волны шире экрана (140%), чтобы при сдвигах не было пустот по краям */
+.wave {
+  position: absolute;
+  width: 140%;
+  left: -20%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Каскад из 6 волн */
+.wave1 {
+  bottom: 0%;
+  z-index: 1;
+  animation: moveWaves 10s ease-in-out infinite;
+}
+
+.wave2 {
+  bottom: -2%;
+  z-index: 2;
+  animation: moveWavesReverse 12s ease-in-out infinite;
+}
+
+.wave3 {
+  bottom: -4%;
+  z-index: 3;
+  animation: moveWaves 9s ease-in-out infinite;
+}
+
+.wave4 {
+  bottom: -6%;
+  z-index: 4;
+  animation: moveWavesReverse 11s ease-in-out infinite;
+}
+
+.wave5 {
+  bottom: -8%;
+  z-index: 5;
+  animation: moveWaves 8s ease-in-out infinite;
+}
+
+.wave6 {
+  bottom: -10%;
+  z-index: 6;
+  animation: moveWavesReverse 7s ease-in-out infinite;
+}
+
+/* Корректное смещение всего широкого блока влево-вправо без пустот */
+@keyframes moveWaves {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(6%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes moveWavesReverse {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(-6%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Слой контейнера для всех матросов на правом холсте 1080x1080 */
+.sailors-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* Базовый стиль матросов: скрыты по умолчанию, плавное появление */
+.sailor {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Видимый матрос */
+.sailor.active {
+  opacity: 1 !important;
+}
+
+/* 1. Первый матрос у тележки (X: 260.75, Y: 462.84, W: 96.93) */
+.crew-1 {
+  left: 24.14%;   /* 260.75 / 1080 */
+  top: 42.85%;    /* 462.84 / 1080 */
+  width: 8.98%;   /* 96.93 / 1080 */
+}
+/* 2. Матрос слева от трубы (X: 440.93, Y: 429.42, W: 56.55) */
+.crew-2 {
+  left: 40.83%;   /* 440.93 / 1080 */
+  top: 39.76%;    /* 429.42 / 1080 */
+  width: 5.24%;   /* 56.55 / 1080 */
+}
+
+/* 3. Матрос в трубе (X: 503.39, Y: 305.47, W: 72.73) */
+.crew-3 {
+  left: 46.61%;   /* 503.39 / 1080 */
+  top: 28.28%;    /* 305.47 / 1080 */
+  width: 6.73%;   /* 72.73 / 1080 */
+}
+
+/* 4. Матрос справа от трубы (внутри корабля) */
+.ship-container .crew-4 {
+  left: 51.68%;   /* Относительно ширины корабля */
+  top: 38.41%;
+  width: 9.35%;
+  z-index: 1;     /* Под картинкой корабля */
+}
+
+/* 5. Матрос на крыше рубки (внутри корабля) */
+.ship-container .crew-5 {
+  left: 72.12%;   /* Относительно ширины корабля */
+  top: 34.89%;
+  width: 9.35%;
+  z-index: 1;     /* Под картинкой корабля */
+}/* 6. У штурвала (X: 836.84, Y: 552.39, W: 68.22) */
+.crew-6 {
+  left: 77.48%;   /* 836.84 / 1080 */
+  top: 51.15%;    /* 552.39 / 1080 */
+  width: 6.32%;   /* 68.22 / 1080 */
+}
+
+/* 7. В правом окне рубки (X: 736.31, Y: 569.07, W: 73.04) */
+.crew-7 {
+  left: 68.18%;   /* 736.31 / 1080 */
+  top: 52.69%;    /* 569.07 / 1080 */
+  width: 6.76%;   /* 73.04 / 1080 */
+}
+
+/* 8. В дверном проеме рубки (X: 596.36, Y: 583.42, W: 29.51) */
+.crew-8 {
+  left: 55.22%;   /* 596.36 / 1080 */
+  top: 54.02%;    /* 583.42 / 1080 */
+  width: 2.73%;   /* 29.51 / 1080 */
+}
+
+/* 9. В левом круглом иллюминаторе (X: 500.58, Y: 635.05, W: 13.8) */
+.crew-9 {
+  left: 46.35%;   /* 500.58 / 1080 */
+  top: 58.80%;    /* 635.05 / 1080 */
+  width: 1.28%;   /* 13.8 / 1080 */
+}
+
+/* 10. В крайнем левом иллюминаторе (X: 444.02, Y: 620.99, W: 13.8) */
+.crew-10 {
+  left: 41.11%;   /* 444.02 / 1080 */
+  top: 57.50%;    /* 620.99 / 1080 */
+  width: 1.28%;   /* 13.8 / 1080 */
+}
+
+/* ========================================================================
+   4. АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ (< 1024px)
+   ======================================================================== */
+@media screen and (max-width: 1024px) {
+  /* Холст разворота перестает быть фиксированной строкой и вытягивается по высоте */
+  #canvas-scene {
+    width: 100vw;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    flex-direction: column; /* Страницы встают друг под друга */
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Левая страница (текст) на всю ширину */
+  .left-side {
+    width: 90%;
+    height: auto;
+    min-height: 70vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text-parent {
+    width: 85%;
+    max-width: 450px;
+  }
+
+  /* Правая страница (корабль и волны) под текстом */
+  .right-side {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* Сохраняет квадратную пропорцию 1080x1080 */
+    max-width: 600px;
+  }
+}
