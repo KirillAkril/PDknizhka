@@ -213,7 +213,8 @@ main::-webkit-scrollbar {
 #textbox {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Текст и абзацы выравниваются по левому краю на всех страницах */
+  text-align: left;        /* Текст выровнен по левому краю */
   padding: calc(40px + 56 * ((100vw - 767px) / (1920 - 767)));
 }
 #textbox h1 {
@@ -269,6 +270,9 @@ main::-webkit-scrollbar {
   position: relative;
   width: 38%;
   margin-bottom: 64px;
+  margin-left: auto;   /* Автоматический отступ слева */
+  margin-right: auto;  /* Автоматический отступ справа центрирует картинку */
+  display: block;      /* Гарантирует корректную работу центрирования */
 }
 
 /* ---------- 6. Сцена (инфраструктура; позиции слоёв — в N.css) ---------- */
@@ -330,6 +334,20 @@ main::-webkit-scrollbar {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+/* ========================================================================
+   Буквица (первая заглавная буква-картинка)
+   ======================================================================== */
+.dropcap {
+  height: 5.4em; /* Пропорционально высоте текста */
+  width: auto;
+  margin-right: 0.25em;
+  margin-top: 0.1em;
+  margin-bottom: -0.6em;
+  object-fit: contain;
+}
+
 
 /* ---------- 8. Адаптивность ---------- */
 @media only screen and (min-width: 1601px) {
