@@ -1,0 +1,34 @@
+/* ==========================================================================
+   3.css — стили анимации для страницы 3
+   ========================================================================== */
+
+#scene {
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#overflow-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.anim-step {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+/* Активный (видимый) кадр */
+.anim-step.active {
+  opacity: 1;
+  visibility: visible;
+}
