@@ -16,12 +16,12 @@ html, body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* Прижимаем сцену к низу экрана */
   background: #ffffff;
   overflow: hidden;
 }
 
-/* Главный холст разворота: пропорции 16:9 (1920x1080), масштабируется под экран */
+/* Главный холст разворота: пропорции 16:9 (1920x1080) */
 #canvas-scene {
   position: relative;
   width: 100vw;
@@ -29,8 +29,9 @@ html, body {
   max-height: 100vh;
   max-width: 177.78vh; /* 100vh * (1920/1080) */
   display: flex;
-  background: #ffffff;
-  overflow: hidden;
+  align-items: flex-end;
+  background: transparent;
+  overflow: visible;
 }
 
 .abs {
@@ -38,16 +39,16 @@ html, body {
 }
 
 /* ========================================================================
-   2. ЛЕВАЯ СТОРОНА (Ширина 840px от 1920px = 43.75%)
+   2. ЛЕВАЯ СТОРОНА (Всегда держит высоту 100vh и центрирует текст)
    ======================================================================== */
 .left-side {
   position: relative;
   width: 43.75%; /* 840 / 1920 */
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  z-index: 25;
 }
 
 /* Текстовый родитель (648 x 745.82 внутри левой стороны) */
@@ -56,6 +57,7 @@ html, body {
   width: 77.14%; /* 648 / 840 */
   aspect-ratio: 648 / 745.82;
   max-width: 648px;
+  max-height: 80vh;
 }
 
 /* Верхний декор */
@@ -66,7 +68,7 @@ html, body {
   height: auto;
 }
 
-/* Заголовок книги (в Figma шрифт 110px при ширине контейнера 648px) */
+/* Заголовок книги */
 .text-parent h1 {
   position: absolute;
   left: 0%;
@@ -74,7 +76,7 @@ html, body {
   width: 100%;
   font-family: "PT Astra Serif", serif;
   font-weight: 700;
-  font-size: 5vw; /* Точный масштаб под размер 110px в макете */
+  font-size: min(5vw, 8.89vh);
   color: #33597c;
   line-height: 105%;
   text-align: center;
@@ -97,7 +99,7 @@ html, body {
   width: 60.80%; /* 394 / 648 */
   text-align: left;
   font-family: "PT Astra Sans", sans-serif;
-  font-size: 1.25vw; /* Четкий размер шрифта текста кредитов в пропорциях макета */
+  font-size: min(1.25vw, 2.22vh);
   border-collapse: collapse;
 }
 
@@ -124,35 +126,107 @@ html, body {
   top: 85.54%;
   width: 39.23%;
   height: auto;
-  z-index: 23;
+  z-index: 26;
 }
 
+/* ========================================================================
+   3. ВОЛНЫ (ПОВЕРХ корабля по z-index, bg-wave поднят выше)
+   ======================================================================== */
+
+/* Фоновые полосы: подняты высоко (на 78% высоты), лежат за кораблем (z-index: 1) */
+.bg-wave {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: max(115%, 115vw);
+  height: 78%; /* Подняли bg-wave значительно выше! */
+  object-fit: fill;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Передние волны: центрированы (без обрезанных краев) и идут ПОВЕРХ корабля */
+.wave {
+  position: absolute;
+  left: 50%;
+  width: max(140%, 140vw);
+  height: 36%; /* Оптимальная высота волн, чтобы они закрывали только низ корпуса корабля */
+  object-fit: fill;
+  pointer-events: none; /* Пропускают клики сквозь себя к матросам и кораблю */
+}
+
+/* Каскад из 6 волн: z-index 15–20 (ПОВЕРХ корабля, у которого z-index: 10) */
+.wave1 {
+  bottom: 0%;
+  z-index: 15;
+  animation: moveWaves 10s ease-in-out infinite;
+}
+
+.wave2 {
+  bottom: -2%;
+  z-index: 16;
+  animation: moveWavesReverse 12s ease-in-out infinite;
+}
+
+.wave3 {
+  bottom: -4%;
+  z-index: 17;
+  animation: moveWaves 9s ease-in-out infinite;
+}
+
+.wave4 {
+  bottom: -6%;
+  z-index: 18;
+  animation: moveWavesReverse 11s ease-in-out infinite;
+}
+
+.wave5 {
+  bottom: -8%;
+  z-index: 19;
+  animation: moveWaves 8s ease-in-out infinite;
+}
+
+.wave6 {
+  bottom: -10%;
+  z-index: 20;
+  animation: moveWavesReverse 7s ease-in-out infinite;
+}
+
+/* Смещение относительно центра (-50%) влево и вправо без оголения краев картинки */
+@keyframes moveWaves {
+  0%   { transform: translateX(-50%); }
+  50%  { transform: translateX(-44%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes moveWavesReverse {
+  0%   { transform: translateX(-50%); }
+  50%  { transform: translateX(-56%); }
+  100% { transform: translateX(-50%); }
+}
 
 /* ========================================================================
-   3. ПРАВЫЙ КОНТЕЙНЕР (Квадрат 1080x1080, ровно 56.25% от 1920)
+   4. ПРАВЫЙ КОНТЕЙНЕР: КОРАБЛЬ И МАТРОСЫ (Под волнами, но приподнят выше!)
    ======================================================================== */
 .right-side {
   position: relative;
-  width: 56.25%; /* 1080 / 1920 */
+  width: 56.25%; /* 1080 / 1920 — строгий квадрат 1:1 */
   height: 100%;
-  overflow: hidden;
+  margin-bottom: 2%; /* Приподнимаем весь корабль вместе с матросами повыше на ЛЮБОМ экране! */
+  z-index: 10; /* Корабль находится ПОД волнами (у волн z-index 15–20) */
 }
 
-/* ========================================================================
-   ПРАВЫЙ КОНТЕЙНЕР: КОРАБЛЬ И ВОЛНЫ
-   ======================================================================== */
-
-/* Контейнер корабля (потомок правого фрейма 1080x1080) */
+/* Контейнер корабля */
 .ship-container {
   left: 9.17%;          /* 99.01 / 1080 */
   top: 13.69%;          /* 147.87 / 1080 */
   width: 83.21%;        /* 898.65 / 1080 */
-  aspect-ratio: 898.65 / 840.26; /* Фиксируем пропорции из Figma */
+  aspect-ratio: 898.65 / 840.26;
   pointer-events: auto;
-  z-index: 0;
+  z-index: 10;
 }
 
-/* Картинка корабля заполняет свой контейнер */
 .ship-img {
   width: 100%;
   height: 100%;
@@ -161,77 +235,6 @@ html, body {
   position: relative;
   z-index: 10;
   pointer-events: none;
-}
-
-
-/* Фоновые полосы на нижней половине разворота */
-.bg-wave {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 115%;
-  height: auto;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Делаем волны шире экрана (140%), чтобы при сдвигах не было пустот по краям */
-.wave {
-  position: absolute;
-  width: 140%;
-  left: -20%;
-  height: auto;
-  pointer-events: none;
-}
-
-/* Каскад из 6 волн */
-.wave1 {
-  bottom: 0%;
-  z-index: 1;
-  animation: moveWaves 10s ease-in-out infinite;
-}
-
-.wave2 {
-  bottom: -2%;
-  z-index: 2;
-  animation: moveWavesReverse 12s ease-in-out infinite;
-}
-
-.wave3 {
-  bottom: -4%;
-  z-index: 3;
-  animation: moveWaves 9s ease-in-out infinite;
-}
-
-.wave4 {
-  bottom: -6%;
-  z-index: 4;
-  animation: moveWavesReverse 11s ease-in-out infinite;
-}
-
-.wave5 {
-  bottom: -8%;
-  z-index: 5;
-  animation: moveWaves 8s ease-in-out infinite;
-}
-
-.wave6 {
-  bottom: -10%;
-  z-index: 6;
-  animation: moveWavesReverse 7s ease-in-out infinite;
-}
-
-/* Корректное смещение всего широкого блока влево-вправо без пустот */
-@keyframes moveWaves {
-  0% { transform: translateX(0%); }
-  50% { transform: translateX(6%); }
-  100% { transform: translateX(0%); }
-}
-
-@keyframes moveWavesReverse {
-  0% { transform: translateX(0%); }
-  50% { transform: translateX(-6%); }
-  100% { transform: translateX(0%); }
 }
 
 /* Слой контейнера для всех матросов на правом холсте 1080x1080 */
@@ -244,7 +247,6 @@ html, body {
   pointer-events: none;
 }
 
-/* Базовый стиль матросов: скрыты по умолчанию, плавное появление */
 .sailor {
   position: absolute;
   opacity: 0;
@@ -253,115 +255,131 @@ html, body {
   cursor: pointer;
 }
 
-/* Видимый матрос */
 .sailor.active {
   opacity: 1 !important;
 }
 
-/* 1. Первый матрос у тележки (X: 260.75, Y: 462.84, W: 96.93) */
+/* Координаты матросов в процентах от квадрата 1080x1080 — стоят как влитые */
 .crew-1 {
-  left: 24.14%;   /* 260.75 / 1080 */
-  top: 42.85%;    /* 462.84 / 1080 */
-  width: 8.98%;   /* 96.93 / 1080 */
+  left: 24.14%;
+  top: 42.85%;
+  width: 8.98%;
 }
-/* 2. Матрос слева от трубы (X: 440.93, Y: 429.42, W: 56.55) */
+
 .crew-2 {
-  left: 40.83%;   /* 440.93 / 1080 */
-  top: 39.76%;    /* 429.42 / 1080 */
-  width: 5.24%;   /* 56.55 / 1080 */
+  left: 40.83%;
+  top: 39.76%;
+  width: 5.24%;
 }
 
-/* 3. Матрос в трубе (X: 503.39, Y: 305.47, W: 72.73) */
 .crew-3 {
-  left: 46.61%;   /* 503.39 / 1080 */
-  top: 28.28%;    /* 305.47 / 1080 */
-  width: 6.73%;   /* 72.73 / 1080 */
+  left: 46.61%;
+  top: 28.28%;
+  width: 6.73%;
 }
 
-/* 4. Матрос справа от трубы (внутри корабля) */
 .ship-container .crew-4 {
-  left: 51.68%;   /* Относительно ширины корабля */
+  left: 51.68%;
   top: 38.41%;
   width: 9.35%;
-  z-index: 1;     /* Под картинкой корабля */
+  z-index: 1;
 }
 
-/* 5. Матрос на крыше рубки (внутри корабля) */
 .ship-container .crew-5 {
-  left: 72.12%;   /* Относительно ширины корабля */
+  left: 72.12%;
   top: 34.89%;
   width: 9.35%;
-  z-index: 1;     /* Под картинкой корабля */
-}/* 6. У штурвала (X: 836.84, Y: 552.39, W: 68.22) */
+  z-index: 1;
+}
+
 .crew-6 {
-  left: 77.48%;   /* 836.84 / 1080 */
-  top: 51.15%;    /* 552.39 / 1080 */
-  width: 6.32%;   /* 68.22 / 1080 */
+  left: 77.48%;
+  top: 51.15%;
+  width: 6.32%;
 }
 
-/* 7. В правом окне рубки (X: 736.31, Y: 569.07, W: 73.04) */
 .crew-7 {
-  left: 68.18%;   /* 736.31 / 1080 */
-  top: 52.69%;    /* 569.07 / 1080 */
-  width: 6.76%;   /* 73.04 / 1080 */
+  left: 68.18%;
+  top: 52.69%;
+  width: 6.76%;
 }
 
-/* 8. В дверном проеме рубки (X: 596.36, Y: 583.42, W: 29.51) */
 .crew-8 {
-  left: 55.22%;   /* 596.36 / 1080 */
-  top: 54.02%;    /* 583.42 / 1080 */
-  width: 2.73%;   /* 29.51 / 1080 */
+  left: 55.22%;
+  top: 54.02%;
+  width: 2.73%;
 }
 
-/* 9. В левом круглом иллюминаторе (X: 500.58, Y: 635.05, W: 13.8) */
 .crew-9 {
-  left: 46.35%;   /* 500.58 / 1080 */
-  top: 58.80%;    /* 635.05 / 1080 */
-  width: 1.28%;   /* 13.8 / 1080 */
+  left: 46.35%;
+  top: 58.80%;
+  width: 1.28%;
 }
 
-/* 10. В крайнем левом иллюминаторе (X: 444.02, Y: 620.99, W: 13.8) */
 .crew-10 {
-  left: 41.11%;   /* 444.02 / 1080 */
-  top: 57.50%;    /* 620.99 / 1080 */
-  width: 1.28%;   /* 13.8 / 1080 */
+  left: 41.11%;
+  top: 57.50%;
+  width: 1.28%;
 }
 
 /* ========================================================================
-   4. АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ (< 1024px)
+   5. АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ (Текст сверху, корабль снизу)
    ======================================================================== */
-@media screen and (max-width: 1024px) {
-  /* Холст разворота перестает быть фиксированной строкой и вытягивается по высоте */
+@media screen and (max-width: 900px), screen and (orientation: portrait) {
   #canvas-scene {
     width: 100vw;
-    height: auto;
-    max-height: none;
-    max-width: none;
-    flex-direction: column; /* Страницы встают друг под друга */
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
-  /* Левая страница (текст) на всю ширину */
+  /* Верхняя половина экрана: название, дизайны и кредитсы */
   .left-side {
-    width: 90%;
-    height: auto;
-    min-height: 70vh;
+    width: 100%;
+    height: 44vh;
+    padding-top: 2vh;
     justify-content: center;
     align-items: center;
   }
 
   .text-parent {
-    width: 85%;
-    max-width: 450px;
+    height: 90%;
+    width: auto;
+    aspect-ratio: 648 / 745.82;
+    max-width: 85vw;
   }
 
-  /* Правая страница (корабль и волны) под текстом */
+  .text-parent h1 {
+    font-size: min(11.5vw, 5.8vh);
+  }
+
+  .credits {
+    font-size: min(2.9vw, 1.45vh);
+  }
+
+  /* Нижняя половина экрана: корабль поднят выше (margin-bottom: 8vh), чтобы стоять высоко на волнах */
   .right-side {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1; /* Сохраняет квадратную пропорцию 1080x1080 */
-    max-width: 600px;
+    width: min(88vw, 48vh);
+    height: min(88vw, 48vh);
+    aspect-ratio: 1 / 1;
+    margin-bottom: 10vh; /* Подняли корабль ощутимо выше от дна! */
+    flex-shrink: 0;
+    z-index: 10; /* Под волнами (15–20) */
+  }
+
+  /* На планшетах и телефонах bg-wave поднят почти в 2 раза выше (68vh) */
+  .bg-wave {
+    width: 200vw;
+    height: 68vh;
+  }
+
+  /* Передние волны лежат поверх низа корабля, но не затапливают его палубу */
+  .wave {
+    width: 220vw;
+    height: 28vh;
   }
 }
