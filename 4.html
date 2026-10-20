@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как я ловил человечков — страница 4</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 1.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/4.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>
+          <img class="dropcap" src="./assets/img/page-4/LetterR.png" alt="Я">всё время думал о человечках. Я хотел
+          взять тряпочку, вроде маленького коврика, и положить около дверей. Намочить тряпочку чернилами. Они выбегут,
+          не заметят сразу, ножки запачкают и наследят по всему пароходику. Я хоть увижу, какие у них ножки. Может быть,
+          некоторые босиком, чтобы тише ступать. Да нет, они страшно хитрые и только смеяться будут над всеми моими
+          штуками.
+        </p>
+        <p>
+          Я не мог больше терпеть.
+        </p>
+        <p>
+          И вот я решил непременно взять пароходик и посмотреть и поймать человечков. Хоть одного. Надо только устроить
+          так, чтобы остаться одному дома. Бабушка всюду меня с собой таскала, во все гости. Всё к каким-то старухам.
+          Сиди – и ничего нельзя трогать. Можно только кошку гладить. И шушукает бабушка с ними полдня.</p>
+        <p>
+          Вот я вижу – бабушка собирается: стала собирать печенье в коробочку для этих старух – чай там пить. Я побежал
+          в сени, достал мои варежки вязаные и натёр себе и лоб и щёки – всю морду, одним словом. Не жалея. И тихонько
+          прилёг на кровать. </p>
+        <p>
+          Бабушка вдруг хватилась: </p>
+        <p>
+          – Боря, Борюшка, где ж ты? </p>
+        <p>
+          Я молчу и глаза закрыл. Бабушка ко мне:</p>
+        <p>
+          – Что это ты лёг?
+        </p>
+        <p>
+          – Голова болит.
+        </p>
+        <p>
+          Она тронула лоб.
+        </p>
+        <p>
+          – Погляди-ка на меня! Сиди дома. Назад пойду, малины возьму в аптеке. Скоро вернусь. Долго сидеть не буду. А
+          ты раздевайся-ка и ложись. Ложись, ложись без разговору.
+        </p>
+        <p>
+          Стала помогать мне, уложила, увернула одеялом и всё приговаривала: «Я сейчас вернусь, живым духом».
+        </p>
+        <p>
+          Бабушка заперла меня на ключ. Я выждал пять минут: а вдруг вернётся? Вдруг забыла там что-нибудь?
+        </p>
+
+        <img id="undertext" src="./assets/img/page-1/UnderTextImage.png" alt="">
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — сюда помещаются слои-изображения.
+         Каждый слой: <img class="scene__img" id="имя" src="..." alt="">.
+         Позиции и размеры (в % от #scene, по макету Figma) — в 1.css,
+         анимацию/интерактив — в page1.js.
+         #overflow-wrapper не даёт слоям вылезать за границы сцены
+         при анимациях; если ничего не вылезает — можно удалить.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <!-- Фоновые фазы засыпания (сменяются по таймеру) -->
+        <img class="scene__img phase-img active" id="faza1" src="./assets/img/page-4/faza1.jpg" alt="фаза 1">
+
+        <!-- Отдельные ноги для фазы 1 (болтают ногами) -->
+        <img class="scene__img leg right-leg" src="./assets/img/page-4/rightleg.png" alt="нога правая">
+        <img class="scene__img leg left-leg" src="./assets/img/page-4/leftleg.png" alt="нога левая">
+
+        <!-- Остальные фазы засыпания -->
+        <img class="scene__img phase-img" id="faza2" src="./assets/img/page-4/faza2.jpg" alt="фаза 2">
+        <img class="scene__img phase-img" id="faza3" src="./assets/img/page-4/faza3.jpg" alt="фаза 3">
+        <img class="scene__img phase-img" id="faza4" src="./assets/img/page-4/faza4.jpg" alt="фаза 4">
+      </div>
+    </div>
+  </main>
+
+  <!-- Логика сцены страницы 4 -->
+  <script src="./assets/page4.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>

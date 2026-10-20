@@ -5,7 +5,7 @@
 
 /* Общее количество страниц книги.
    Должно совпадать с totalStandardPages в assets/ui.js. */
-var BOOK_TOTAL_PAGES = 12;
+var BOOK_TOTAL_PAGES = 6;
 
 window.addEventListener('message', function (event) {
   if (!event.data || event.data.newPageNumber === undefined) return;

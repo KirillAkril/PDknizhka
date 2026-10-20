@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как я ловил человечков — страница 6</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 1.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/6.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>
+          <img class="dropcap" src="./assets/img/page-6/LetterH.png" alt="Н">е лезет ни один! Я тогда решил сразу
+          отвернуть палубу и туда в серёдку рукой – прихлопнуть. Хоть один да попадётся. Только надо сразу: они уж там
+          небось приготовились – откроешь, а человечки прыск все в стороны.
+        </p>
+        <p>
+          Я быстро откинул палубу и прихлопнул внутрь рукой. Ничего. Совсем, совсем ничего! Даже скамеек этих не было.
+          Голые борта. Как в кастрюльке. Я поднял руку. И под рукой, конечно, ничего. У меня руки дрожали, когда я
+          прилаживал назад палубу. Всё криво становилось. И лесенки никак не приделать. Они болтались как попало. Я
+          кой-как приткнул палубу на место и поставил пароходик на полку. Теперь всё пропало!
+        </p>
+        <p>
+          Я понял: они сидят на лавках, ноги поджали и руками что есть сил уцепились в сиденья. Сидят как приклеенные.
+        </p>
+        <p>
+          Я скорей бросился в кровать, завернулся с головой.
+        </p>
+        <p>
+          Слышу ключ в дверях.
+        </p>
+        <p>
+          – Бабушка! – под одеялом шептал я. – Бабушка, миленькая, родненькая, чего я наделал-то!
+        </p>
+        <p>
+          А бабушка стояла уж надо мной и по голове гладила:
+        </p>
+        <p>
+          – Да чего ты ревёшь да плачешь-то чего? Родной ты мой, Борюшка! Видишь, как я скоро?
+        </p>
+        <p>
+          Она ещё не видала пароходика.
+        </p>
+        <img id="undertext" src="./assets/img/page-1/UnderTextImage.png" alt="">
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — сюда помещаются слои-изображения.
+         Каждый слой: <img class="scene__img" id="имя" src="..." alt="">.
+         Позиции и размеры (в % от #scene, по макету Figma) — в 1.css,
+         анимацию/интерактив — в page1.js.
+         #overflow-wrapper не даёт слоям вылезать за границы сцены
+         при анимациях; если ничего не вылезает — можно удалить.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <div id="scene">
+          <div id="overflow-wrapper">
+            <img class="scene__img page6__background" id="page6-background" src="./assets/img/page-6/bg paralax.jpg"
+              alt="Пароход на полке">
+
+            <img class="scene__img page6__front" id="page6-front" src="./assets/img/page-6/front.png"
+              alt="Мальчик под одеялом">
+          </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+  <!-- Логика сцены страницы 6 -->
+  <script src="./assets/page6.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>

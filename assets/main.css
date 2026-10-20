@@ -347,7 +347,15 @@ main::-webkit-scrollbar {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
+body,
+button,
+input,
+optgroup,
+select,
+textarea,
+#notify {
+  font-family: "PT Astra Sans", sans-serif;
+}
 
 
 
@@ -435,3 +443,4 @@ main::-webkit-scrollbar {
     width: 20%;
   }
 }
+

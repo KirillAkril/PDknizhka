@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const UI_CONFIG = {
-        totalStandardPages: 12, // кол-во стандартных страниц
-        imageExtension: 'png', // формат картинок которые скрипт подсасывает из table-of-content
+        totalStandardPages: 6, // кол-во стандартных страниц
+        imageExtension: 'jpg', // формат картинок которые скрипт подсасывает из table-of-content
 
         hiddenPages: ['6_1.html', '6_2.html', '6_3.html'],
         //тут лежат нестандартные страницы (например, когда у вас несколько версий одной страницы должны переключаться скриптом и быть в разных html)
@@ -13,20 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
         // тут страницы с нестандартными переходами
         customNavigation: {
-            '6_1.html': { next: '6.html', prev: '6.html' },
-            '6_2.html': { next: '6.html', prev: '6.html' },
-            '6_3.html': { next: '6.html', prev: '6.html' },
+            '7_1.html': { next: '7.html', prev: '7.html' },
+            '7_2.html': { next: '7.html', prev: '7.html' },
+            '7_3.html': { next: '7.html', prev: '7.html' },
 
         },
         //тут страницы на которых нужно выключит навигацию стрелками клавы
-        disabledKeyboardPages: ['6.html'],
+        disabledKeyboardPages: ['7.html'],
 
         //Тут лежат подсказки
         pageHints: {
             'index.html': 'Добро пожаловать! Нажмите кнопку "ЧИТАТЬ ДАЛЕЕ", чтобы начать.',
             '1.html': 'Подвигайте мышкой или покачайте телефон — мальчик начнёт раскачиваться на стуле.',
             '2.html': 'Нажмите на лампу, чтобы включить или выключить свет.',
-
+            '3.html': 'Нажмите на мальчика, чтобы он разрезал конфету.',
+            '4.html': 'Нажмите на мальчика, чтобы разбудить его.',
+            '5.html': 'Нажмите на якорь, чтобы отбросить его.',
+            '6.html': 'Водите пальцем по экрану, чтобы увидеть корабль.',
         }
     };
 

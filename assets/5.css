@@ -1,0 +1,85 @@
+/* Все координаты и размеры заданы в процентах от сцены 1080 × 1080. */
+#overflow-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.page5__background {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 89.81%; /* исходное изображение 1080 × 970 */
+  z-index: 1;
+}
+
+/* Позиция палубы примерная — её нужно сверить с Figma. */
+.page5__deck {
+  left: 44%;
+  top: 47.05%;
+  width: 44.74%;
+  height: 31.61%;
+  z-index: 4;
+  transform-origin: 48% 60%;
+}
+
+/* Точные координаты и размер со скриншота Figma. */
+.page5__hand {
+  left: 7.76%;
+  top: 55.10%;
+  width: 57.29%;
+  height: 28.33%;
+  z-index: 3;
+  transform-origin: 8% 12%;
+}
+
+.page5__anchor {
+  left: 36.41%;
+  top: 88.05%;
+  width: 5.42%;
+  height: 3.49%;
+  z-index: 4;
+  cursor: pointer;
+  transition: left 0.35s ease-out, top 0.35s ease-out, transform 0.35s ease-out;
+}
+
+/* Анимация руки и палубы запускается при загрузке и повторяется по клику. */
+#scene.is-shaking .page5__hand {
+  animation: page5-hand-shake 1.5s ease-in-out 1;
+}
+
+#scene.is-shaking .page5__deck {
+  animation: page5-deck-rock 1.5s ease-in-out 1;
+}
+
+@keyframes page5-hand-shake {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(-4deg); }
+  20%, 40%, 60%, 80% { transform: rotate(4deg); }
+}
+
+@keyframes page5-deck-rock {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(-3deg); }
+  20%, 40%, 60%, 80% { transform: rotate(3deg); }
+}
+
+/* Якорь отлетает в сторону и возвращается на место.
+   Короткое движение удерживает его в свободной области под кораблём. */
+.page5__anchor.kick-right {
+  animation: page5-anchor-right 0.45s ease-out;
+}
+
+.page5__anchor.kick-left {
+  animation: page5-anchor-left 0.45s ease-out;
+}
+
+@keyframes page5-anchor-right {
+  45% { transform: translateX(60%) rotate(35deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
+
+@keyframes page5-anchor-left {
+  45% { transform: translateX(-60%) rotate(-35deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
